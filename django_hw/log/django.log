@@ -4,3 +4,18 @@ Watching for file changes with StatReloader
 "GET / HTTP/1.1" 200 455
 "GET / HTTP/1.1" 200 455
 "GET /about/ HTTP/1.1" 200 462
+Watching for file changes with StatReloader
+"GET / HTTP/1.1" 200 455
+Not Found: /favicon.ico
+"GET /favicon.ico HTTP/1.1" 404 2440
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+"GET / HTTP/1.1" 200 455
+Not Found: /product
+"GET /product HTTP/1.1" 404 2532
+Not Found: /products
+"GET /products HTTP/1.1" 404 2535
+"GET /hw2 HTTP/1.1" 301 0
+"GET /hw2/ HTTP/1.1" 200 3
