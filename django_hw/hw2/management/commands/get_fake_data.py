@@ -23,8 +23,8 @@ class Command(BaseCommand):
 
         for i in range(1, qty_custs + 1):
             customer = Customer(name=f'name_{i}', email=f'email{i}@em.em',
-                                phone=f'+79{random.randint(100_000_000, 999_999_999)}',
-                                address=f'city {i},{i}th st, bld {i}, apt {i}')
+                                phone=f'89{random.randint(100_000_000, 999_999_999)}',
+                                address=f'г {i},{i}, {i}, {i}')
             customer.save()
             customers.append(customer)
 
