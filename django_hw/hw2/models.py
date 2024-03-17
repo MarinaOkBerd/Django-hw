@@ -20,7 +20,7 @@ class Product(models.Model):
     date_added = models.DateField(auto_now_add=True)
 
     def __str__(self):
-        return f'{self.title}: {self.price}ye x {self.amount}'
+        return f'{self.title}'
 
 
 class Order(models.Model):
@@ -30,4 +30,4 @@ class Order(models.Model):
     date_ordered = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return f'{self.customer.name}: {list(map(str, self.products.all()))} = {self.total_price}ye'
+        return f'{list(map(str, self.products.all()))}'
