@@ -1,10 +1,13 @@
 import logging
 
+from django.core.files.storage import FileSystemStorage
 from django.shortcuts import render, get_object_or_404
 from django.utils import timezone
 
 
 from hw2.models import Product, Order, Customer
+
+from hw2.forms import ProductFormWidget
 
 logger = logging.getLogger(__name__)
 
@@ -84,3 +87,32 @@ def customer_products(request, customer_id, period=7):
                'items': products,
                'name': 'order_products'}
     return render(request, 'hw2/item_id.html', context)
+
+
+def add_product_form(request):
+    if request.method == 'POST':
+        form = ProductFormWidget(request.POST, request.FILES)
+        message = 'Некорректные данные'
+        if form.is_valid():
+            title = form.cleaned_data['title']
+            description = form.cleaned_data['description']
+            price = form.cleaned_data['price']
+            amount = form.cleaned_data['amount']
+            date_added = form.cleaned_data['date_added']
+            image = form.cleaned_data['image']
+            fs = FileSystemStorage()
+            fs.save(image.name, image)
+            logger.info(f'Получили {title=}, {description=}, {price=}, {amount=},'
+                        f'{date_added=}', f'фото загружено')
+            product = Product(title=title, description=description, price=price,
+                              amount=amount, date_added=date_added, image=image)
+            product.save()
+            message = 'Товар добавлен'
+    else:
+        form = ProductFormWidget()
+        message = 'Заполните данные для добавления товара'
+    context = {'title': 'Форма товара',
+               'form': form,
+               'message': message,
+               'name': 'add_product_form'}
+    return render(request, 'hw2/product_form.html', context)
